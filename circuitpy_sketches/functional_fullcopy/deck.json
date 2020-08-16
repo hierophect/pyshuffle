@@ -1,0 +1,103 @@
+{
+    "word-lists":[
+            {"name":"num-days-short","entries":[
+                {"e":"one","h":"いちにち","k":"一日"},
+                {"e":"two","h":"ふつか","k":"二日"},
+                {"e":"three","h":"みっか","k":"三日"},
+                {"e":"four","h":"よっか","k":"四日"},
+                {"e":"five","h":"いつか","k":"五日"},
+                {"e":"six","h":"むいか","k":"六日"},
+                {"e":"seven","h":"なのか","k":"七日"},
+                {"e":"eight","h":"ようか","k":"八日"},
+                {"e":"nine","h":"ここのか","k":"九日"},
+                {"e":"ten","h":"とおか","k":"十日"}
+            ]},
+            {"name":"num-days-full","entries":[
+                {"e":"one","h":"いちにち","k":"一日"},
+                {"e":"two","h":"ふつか","k":"二日"},
+                {"e":"three","h":"みっか","k":"三日"},
+                {"e":"four","h":"よっか","k":"四日"},
+                {"e":"five","h":"いつか","k":"五日"},
+                {"e":"six","h":"むいか","k":"六日"},
+                {"e":"seven","h":"なのか","k":"七日"},
+                {"e":"eight","h":"ようか","k":"八日"},
+                {"e":"nine","h":"ここのか","k":"九日"},
+                {"e":"ten","h":"とおか","k":"十日"},
+                {"e":"eleven","h":"じゅういちにち","k":"十一日"},
+                {"e":"twelve","h":"じゅうににち","k":"十二日"},
+                {"e":"thirteen","h":"じゅうさんにち","k":"十三日"},
+                {"e":"fourteen","h":"じゅうよっか","k":"十四日"},
+                {"e":"fifteen","h":"じゅうごにち","k":"十五日"},
+                {"e":"sixteen","h":"じゅうろくにち","k":"十六日"},
+                {"e":"seventeen","h":"じゅうななにち","k":"十七日"},
+                {"e":"eighteen","h":"じゅうはちにち","k":"十八日"},
+                {"e":"nineteen","h":"じゅうくにち","k":"十九日"},
+                {"e":"twenty","h":"はつか","k":"二十日"}
+            ]},
+            {"name":"place","entries":[
+                {"e":"library","h":"としょかん","k":"図書館"},
+                {"e":"living room","h":"いま","k":"居間"},
+                {"e":"park","h":"こうえん","k":"公園"}
+            ]},
+            {"name":"na-adj","entries":[
+                {"e":"quiet","h":"しず","k":"静か"},
+                {"e":"pretty","h":"きれい","k":"きれい"}
+            ]},
+            {"name":"standalone-actions-present-casual","entries":[
+                {"e":"to play","h":"あそぶ","k":"遊ぶ"},
+                {"e":"to walk","h":"あるく","k":"歩く"},
+                {"e":"to sing","h":"うたう","k":"歌う"},
+                {"e":"to be born","h":"うまれる","k":"生まれる"},
+                {"e":"to swim","h":"およぐ","k":"泳ぐ"},
+                {"e":"to return home","h":"かえる","k":"帰る"},
+                {"e":"to die, to pass away","h":"しぬ","k":"死ぬ"},
+                {"e":"to go out","h":"でかける","k":"出かける"},
+                {"e":"to begin, to start","h":"はじまる","k":"始まる"},
+                {"e":"to run","h":"はしる","k":"走る"},
+                {"e":"to work","h":"はたらく","k":"働く"},
+                {"e":"to rest","h":"やすむ","k":"休む"},
+                {"e":"to cross","h":"わたる","k":"渡る"}
+            ]},
+            {"name":"standalone-actions-past-casual","entries":[
+                {"e":"played","h":"あそんだ","k":"遊んだ"},
+                {"e":"walked","h":"あるいた","k":"歩いた"},
+                {"e":"sang","h":"うたった","k":"歌った"},
+                {"e":"was born","h":"うまれった","k":"生まれった"},
+                {"e":"swam","h":"およいだ","k":"泳いだ"},
+                {"e":"returned home","h":"かえった","k":"帰った"},
+                {"e":"died","h":"しんだ","k":"死んだ"},
+                {"e":"went out","h":"でかけった","k":"出かけった"},
+                {"e":"started","h":"はじまった","k":"始まった"},
+                {"e":"ran","h":"はしった","k":"走った"},
+                {"e":"went to work","h":"はたらいた","k":"働いた"},
+                {"e":"rested","h":"やすんだ","k":"休んだ"},
+                {"e":"crossed","h":"わたった","k":"渡った"}
+            ]},
+            {"name":"standalone-actions-past-polite","entries":[
+                {"e":"played","h":"あそびました","k":"遊びました"},
+                {"e":"walked","h":"あるきました","k":"歩きました"},
+                {"e":"sang","h":"うたいました","k":"歌いました"},
+                {"e":"was born","h":"うまれりました","k":"生まれりました"},
+                {"e":"swam","h":"およぎました","k":"泳ぎました"},
+                {"e":"returned home","h":"かえりました","k":"帰りました"},
+                {"e":"died","h":"しにました","k":"死にました"},
+                {"e":"went out","h":"でかけりました","k":"出かけりました"},
+                {"e":"started","h":"はじまりました","k":"始まりました"},
+                {"e":"ran","h":"はしりました","k":"走りました"},
+                {"e":"worked","h":"はたらきました","k":"働きました"},
+                {"e":"rested","h":"やすみました","k":"休みました"},
+                {"e":"crossed","h":"わたりました","k":"渡りました"}
+            ]},
+            {"name":"person","entries":[
+                {"e":"I","h":"わたし","k":"私"},
+                {"e":"my dad","h":"ちち","k":"父"}
+            ]}
+        ],
+    "cards":[
+        {"e":"Yesterday, <<1::person>> <<2::standalone-actions-past-casual>>","k":"昨日、<<1::person>>は<<2::standalone-actions-past-casual>>","h":"きのう、<<1::person>>は<<2::standalone-actions-past-casual>>"},
+        {"e":"Yesterday, <<1::person>> <<2::standalone-actions-past-polite>>","k":"昨日、<<1::person>>は<<2::standalone-actions-past-polite>>","h":"きのう、<<1::person>>は<<2::standalone-actions-past-polite>>"},
+        {"e":"the <<1::place>> is <<2::na-adj>>","k":"<<1::place>>は<<2::na-adj>>です","h":"<<1::place>>は<<2::na-adj>>です"},
+        {"e":"a <<1::na-adj>> <<2::place>>","k":"<<1::na-adj>>な<<2::place>>です","h":"<<1::na-adj>>な<<2::place>>です"},
+        {"e":"it takes <<1::num-days-short>> days","k":"<<1::num-days-short>>間かかります","h":"<<1::num-days-short>>かんかかります"}
+    ]
+}
