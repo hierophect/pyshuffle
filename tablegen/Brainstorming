@@ -1,0 +1,18 @@
+# Selectors
+
+## verb-simple
+kanji,hiragana,english
+遊ぶ;あそぶ;to play
+歌う,うたう,utau,to sing
+
+## verb-expanded
+kanji-infinitive,kanji-plain-past,english,identifiers
+遊ぶ;遊んだ;to play,godan
+
+# Categories:
+// name, word-type, key-type,
+group-activity-verbs; ; {遊ぶ,歌う}
+group-activity; verb-expanded; kanji-infinitive; {to play, to sing}
+
+# Cards
+The children were {group-activity-verbs} yesterday

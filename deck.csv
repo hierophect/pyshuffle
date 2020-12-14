@@ -1,0 +1,74 @@
+# Selectables
+
+## pronoun
+kanji;english
+これ;this
+それ;that
+あれ;that
+
+## na-adj
+kanji;hira;english
+簡単;かんたん;simple
+複雑;ふくざつ;complicated
+静か;しずか;quiet
+きれい;きれい;pretty
+親切;しんせつ;kind
+
+## i-adj
+kanji;hira;english
+おいしい;おいしい;tasty
+高い;たかい;tall
+
+## noun
+kanji;english
+問題;problem
+試験;exam
+日本食;japanese food
+バーガー;burger
+今日;today
+昨日;yesterday
+
+
+## verb
+kanji-affirmative;kanji-negative;kanji-affirmative-past;kanji-negative-past;english-simple;english-preterite;english-past-participle
+歌う;歌わない;歌った;歌わなかった;sing;sang;sung
+食べる;食べない;食べた;食べなかった;eat;ate;eaten
+作る;作らない;作った;作らなかった;make;made;made
+捨てる;捨てない;捨てた;捨てなかった;throw out;threw out;thrown out
+
+
+# Groups
+// name, word-type, key-type, key-list, match-list
+this-that;pronoun;kanji;{これ,それ,あれ}
+level-of-difficulty;na-adj;kanji;{簡単,複雑}
+topic-of-study;noun;kanji;{問題,試験}
+food-todo;verb;kanji;{食べる,作る,捨てる}
+food;noun;kanji;{日本食,バーガー}
+past-day;noun;kanji;{昨日,今日}
+
+
+# Pair Groups:
+
+## verb-able
+歌う;{song,tune}
+
+## objective-hardness
+柔らかい;{布団,ソファ}
+硬い;{ダイヤモンド,石}
+
+
+# Cards
+## lingodeer-J2.1-plain-form-1
+english;kanji
+[this-that] is a [level-of-difficulty] [topic-of-study];[this-that]は[level-of-difficulty]な[topic-of-study]だ
+[this-that] is not a [level-of-difficulty] [topic-of-study];[this-that]は[level-of-difficulty]な[topic-of-study]ではない
+
+## lingodeer-J2.2-plain-form-2
+english;kanji
+Futons are soft;布団は柔らかい
+Diamonds are very hard;ダイヤモンドはとても硬い
+
+## lingodeer-J2.4-daily-life
+english;kanji
+// I ate the japanese food yesterday; kinou, nihonryouri wo tabeta
+I [food-todo:english-preterite] the [food] [past-day];[past-day]、[food]を[food-todo:kanji-affirmative-past]
