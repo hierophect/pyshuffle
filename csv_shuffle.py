@@ -6,6 +6,12 @@ import inquirer
 import sys
 import itertools
 
+DEBUG = False
+
+def log(pre, s):
+    if DEBUG:
+        print(pre + ": "+ str(s))
+
 inq_theme = inquirer.themes.Default()
 if len(sys.argv) > 1:
     if sys.argv[1] == "green":
@@ -30,7 +36,6 @@ with open('deck.csv') as csv_file:
     line_count = 0
     # Increment through the rows in the file, changing list levels as required
     for row in csv_reader:
-        print(row)
         if (not row) or (row[0][:2] == "//"):
             continue
         # Change section
@@ -70,31 +75,23 @@ with open('deck.csv') as csv_file:
             # index = len(d_data[d_section][d_category])-1
             # d_data[d_section][d_category][index]["key-list"] = keylist
 
-print(d_data)
-print(json.dumps(d_data,indent=4))
+log("data", json.dumps(d_data,indent=4,ensure_ascii=False))
 
 # ----------
 # Helper fucntions
 # ----------
 
-def get_card_permutations(card, requested):
-    keylist = card["key-list"]
-    #print(keylist)
-    maximums = [len(d_data["Categories"][item]["key-list"]) for item in keylist]
-    #print(maximums)
+def get_key_permutations(keylist, requested):
+    maximums = [len(d_data["Groups"][item]["key-list"]) for item in keylist]
     ranges = [range(0,m) for m in maximums]
-    #print(ranges)
     outlist = list(itertools.product(*ranges))
-    #print(outlist)
     random.shuffle(outlist)
-    #print(outlist)
-    #print(outlist[:requested])
     return outlist[:requested]
 
 def card_permutation_to_string(cards, index, side, perms):
     #print(cards[index][side])
     frags = cards[index][side].split("[")
-    outlist = ""
+    outstring = ""
     perm_idx = 0;
     for frag in frags:
         #print(frag)
@@ -108,12 +105,12 @@ def card_permutation_to_string(cards, index, side, perms):
             #print(selectable)
             insert = d_data["selectables"][selectable][perms[perm_idx]][keytype]
             #print(insert)
-            outlist = outlist + insert + frag
+            outstring = outstring + insert + frag
             perm_idx += 1
         else:
-            outlist = outlist + frag
-    #print(outlist)
-    return outlist
+            outstring = outstring + frag
+    #print(outstring)
+    return outstring
 
 # ------------------------------------
 # Command line interface for Mac/Linux
@@ -122,22 +119,24 @@ def card_permutation_to_string(cards, index, side, perms):
 print("PyShuffle 0.0.1 (Nov 2020)")
 print("Pulling cards from 'deck.csv'")
 # using inquirer
-questions = [
-  inquirer.Checkbox('cards',
-                message="Select study groups with Spacebar. Press enter to begin",
-                choices=d_data["Cards"]
-            ),
-]
-study_group = []
-while not study_group:
-    answers = inquirer.prompt(questions, theme=inq_theme)
-    study_group = answers["cards"]
-    if not study_group:
-        print("You must select at least one group")
+# questions = [
+#   inquirer.Checkbox('cards',
+#                 message="Select study groups with Spacebar. Press enter to begin",
+#                 choices=d_data["Cards"]
+#             ),
+# ]
+# study_group = []
+# while not study_group:
+#     answers = inquirer.prompt(questions, theme=inq_theme)
+#     study_group = answers["cards"]
+#     if not study_group:
+#         print("You must select at least one group")
+
+#DEBUG: don't want to select groups every time I run it
+study_group = d_data["Cards"].keys()
 
 # Study group is the list of card subgroups (like textbook chapters)
-print("study_group")
-print(study_group)
+log("study_group", study_group)
 
 ## Combine all cards in study group list into a single list
 sublists = [d_data["Cards"][s] for s in study_group]
@@ -154,50 +153,91 @@ sorder = []
             # replace each replacable with a selectable
 
 # TODO: move key type out of data structure and calculate it on the fly
+# (wait, why tho?)
 
 CARD_REPS = 5 # max number of repeats of a card
 
+log("scards", scards)
 # for every card
 for i in range(len(scards)):
     # get a list of all keys on the card's first side
-    print("Scards 0:")
-    print(scards[0])
-    breakpoint()
-    keylist = re.findall(r"\[(.*?)\]", scards[0])
-    perms = get_card_permutations(scards[i], CARD_REPS)
-    print(perms)
-    #for side in scards[i]:
+    keylist = re.findall(r"\[(.*?)\]", scards[i]["sides"][0])
+    # Get a list of permutation tuples
+    perms = get_key_permutations(keylist, CARD_REPS)
+    log("perms", perms)
 
+    #TODO: Should probably do permutations/sides here, instead
+    # because I do sides/permutations I can't add to sorder directly.
+    sorder_batch = []
+    for j in range(len(perms)):
+        sorder_batch.append({})
 
+    for idx, side in enumerate(scards[i]["sides"]):
+        log("side", side)
+        side_name = scards[i]["side_names"][idx]
+        # TODO: obtain variation tuples
+        # this step will also sanitize the keylist between sides for index comparison
+        # for now, fake by using default of side names
+        variations = [side_name] * len(keylist)
+        log("variations",variations)
+        #breakpoint()
 
-# for i in range(len(scards)):
-#     #print("--------Loop:" + str(i))
-#     #print(scards[i])
-#     iterations = get_card_permutations(scards[i],5)
-#     #print("iterations")
-#     #print(iterations)
-#     for side in scards[i]:
-#         if side == "key-list":
-#             continue
-#         if iterations:
-#             for t in iterations:
-#                 sorder.append((i, side, t))
-#         else:
-#             sorder.append((i, side, False))
-# #print("unshuffled")
-# #print(sorder)
-# random.shuffle(sorder)
-# #print("shuffled")
-# #print(sorder)
+        # map to the first keylist, assuming (for now) that all
+        # groups are unique
+        side_idx_map = []
+        #todo: this needs to only take material before the ":" used in compound replacables
+        new_keylist = re.findall(r"\[(.*?)\]", side)
+        for key in new_keylist:
+            for j in range(len(keylist)):
+                if keylist[j] == key:
+                    side_idx_map.append(j)
+                    break
+        log("side idx",side_idx_map)
 
-# for i in range(len(sorder)):
-#     first = card_permutation_to_string(scards, sorder[i][0], sorder[i][1], sorder[i][2])
-#     print(first)
-#     input()
-#     for side in scards[sorder[i][0]]:
-#         if side == "key-list":
-#             continue
-#         print(card_permutation_to_string(scards,sorder[i][0],side,sorder[i][2]))
+        # create a side instance for every permutation
+        for p_idx, perm in enumerate(perms):
+            frags = side.split("[")
+            log("frags", frags)
+            outstring = frags[0]
 
-# print("end")
+            for f_idx, frag in enumerate(frags[1:]):
+                log("frag",frag)
+                # every frag but the first should start with a keystring
+                frag = frag[frag.find("]")+1:]
+                log("frag cut:", frag)
+
+                key = keylist[side_idx_map[f_idx]]
+                log("key", key)
+
+                group = d_data["Groups"][key]
+                key_sel = d_data["Groups"][key]["key-list"][perm[f_idx]]
+                log("key_sel", key_sel)
+                log("group_sel", group)
+                sel = ""
+                log("variant", variations[f_idx])
+
+                log("selectables", d_data["Selectables"][group["word-type"]])
+
+                for selectable in d_data["Selectables"][group["word-type"]]:
+                    if (selectable[group["key-type"]] == key_sel):
+                        sel = selectable[variations[f_idx]]
+                log("sel", sel)
+                outstring = outstring + sel + frag
+                log("outstring", outstring)
+
+            print(outstring)
+            print(p_idx)
+            #sorder_batch[p_idx] = {}
+            sorder_batch[p_idx][side_name] = outstring
+            #sorder_batch[p_idx].update({side_name:outstring})
+            print(json.dumps(sorder_batch,indent=4,ensure_ascii=False))
+            # End perm loop
+        #end side loop
+    sorder.extend(sorder_batch)
+    #end card loop
+
+print(sorder)
+shuffle(sorder)
+print(json.dumps(sorder,indent=4,ensure_ascii=False))
+
 
