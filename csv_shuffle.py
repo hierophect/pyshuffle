@@ -7,10 +7,25 @@ import sys
 import itertools
 
 DEBUG = False
+DEBUG_LEVEL = 0 # 0 is only the basics, higher numbers = more messages
 
-def log(pre, s):
-    if DEBUG:
+class bcolors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKCYAN = '\033[96m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+
+def log(pre, s, prio):
+    if DEBUG and DEBUG_LEVEL >= prio:
         print(pre + ": "+ str(s))
+
+def log_json(pre, s, prio):
+    log(pre, json.dumps(s,indent=4,ensure_ascii=False), prio)
 
 inq_theme = inquirer.themes.Default()
 if len(sys.argv) > 1:
@@ -65,52 +80,18 @@ with open('deck.csv') as csv_file:
             d_data[d_section][row[0]] = {group_keys[i]:row[i] for i in range(1,len(row))}
             parsedlist = d_data[d_section][row[0]]["key-list"][1:-1].split(",")
             d_data[d_section][row[0]]["key-list"] = parsedlist
-            print(d_data[d_section][row[0]])
         elif d_section == "Cards":
-            d_card = {}
-            d_card["side_names"] = selectable_keys
-            d_card["sides"] = row
+            d_card = []
+            for idx, side in enumerate(selectable_keys):
+                d_card.append({"side_name":side,"text":row[idx]})
+            # d_card["side_names"] = selectable_keys
+            # d_card["sides"] = row[idx]
             d_data[d_section][d_category].append(d_card)
             # keylist = re.findall(r"\[(.*?)\]", row[0])
             # index = len(d_data[d_section][d_category])-1
             # d_data[d_section][d_category][index]["key-list"] = keylist
 
-log("data", json.dumps(d_data,indent=4,ensure_ascii=False))
-
-# ----------
-# Helper fucntions
-# ----------
-
-def get_key_permutations(keylist, requested):
-    maximums = [len(d_data["Groups"][item]["key-list"]) for item in keylist]
-    ranges = [range(0,m) for m in maximums]
-    outlist = list(itertools.product(*ranges))
-    random.shuffle(outlist)
-    return outlist[:requested]
-
-def card_permutation_to_string(cards, index, side, perms):
-    #print(cards[index][side])
-    frags = cards[index][side].split("[")
-    outstring = ""
-    perm_idx = 0;
-    for frag in frags:
-        #print(frag)
-        if frag.find("]") != -1:
-            frag = frag[frag.find("]")+1:]
-            #print(frag)
-            key = cards[index]["key-list"][perm_idx]
-            #print(key)
-            selectable = d_data["Categories"][key]["word_type"]
-            keytype = d_data["Categories"][key]["key_type"]
-            #print(selectable)
-            insert = d_data["selectables"][selectable][perms[perm_idx]][keytype]
-            #print(insert)
-            outstring = outstring + insert + frag
-            perm_idx += 1
-        else:
-            outstring = outstring + frag
-    #print(outstring)
-    return outstring
+log("data", json.dumps(d_data,indent=4,ensure_ascii=False),1)
 
 # ------------------------------------
 # Command line interface for Mac/Linux
@@ -136,7 +117,7 @@ print("Pulling cards from 'deck.csv'")
 study_group = d_data["Cards"].keys()
 
 # Study group is the list of card subgroups (like textbook chapters)
-log("study_group", study_group)
+log("study_group", study_group,0)
 
 ## Combine all cards in study group list into a single list
 sublists = [d_data["Cards"][s] for s in study_group]
@@ -149,22 +130,28 @@ sorder = []
         # generate side mapping index list
         # generate variation string tuple
         # for tuple in variation tuples
-            # iterate through side string
-            # replace each replacable with a selectable
-
-# TODO: move key type out of data structure and calculate it on the fly
-# (wait, why tho?)
+            # create an sorder entry with the given side
 
 CARD_REPS = 5 # max number of repeats of a card
 
-log("scards", scards)
+def get_key_permutations(keylist, requested):
+    # randomize what word in the group gets picked
+    maximums = [len(d_data["Groups"][item]["key-list"]) for item in keylist]
+    ranges = [range(0,m) for m in maximums]
+    outlist = list(itertools.product(*ranges))
+    random.shuffle(outlist)
+    return outlist[:requested]
+
 # for every card
 for i in range(len(scards)):
     # get a list of all keys on the card's first side
-    keylist = re.findall(r"\[(.*?)\]", scards[i]["sides"][0])
+    keylist = re.findall(r"\[(.*?)\]", scards[i][0]["text"])
+    for k in range(len(keylist)):
+        keylist[k] = keylist[k].split(":")[0]
+    log("keylist", keylist,1)
     # Get a list of permutation tuples
     perms = get_key_permutations(keylist, CARD_REPS)
-    log("perms", perms)
+    log("perms", perms,1)
 
     #TODO: Should probably do permutations/sides here, instead
     # because I do sides/permutations I can't add to sorder directly.
@@ -172,72 +159,89 @@ for i in range(len(scards)):
     for j in range(len(perms)):
         sorder_batch.append({})
 
-    for idx, side in enumerate(scards[i]["sides"]):
-        log("side", side)
-        side_name = scards[i]["side_names"][idx]
-        # TODO: obtain variation tuples
-        # this step will also sanitize the keylist between sides for index comparison
-        # for now, fake by using default of side names
-        variations = [side_name] * len(keylist)
-        log("variations",variations)
-        #breakpoint()
+    for s_idx, side in enumerate(scards[i]):
+        #add some information to the card data list
+        side_name = side["side_name"]
+
+        # Obtain variation tuples
+        variations = []
+        varlist = re.findall(r"\[(.*?)\]", side["text"])
+        for var in varlist:
+            var = var.split(":")
+            if len(var) == 1:
+                variations.append(side_name)
+            else:
+                variations.append(var[1])
+                log("vari",var[1],0)
+
+        log("variations",variations,1)
+        scards[i][s_idx]["variations"] = variations
 
         # map to the first keylist, assuming (for now) that all
         # groups are unique
         side_idx_map = []
         #todo: this needs to only take material before the ":" used in compound replacables
-        new_keylist = re.findall(r"\[(.*?)\]", side)
+        new_keylist = re.findall(r"\[(.*?)\]", side["text"])
         for key in new_keylist:
+            key = key.split(":")[0]
             for j in range(len(keylist)):
                 if keylist[j] == key:
                     side_idx_map.append(j)
                     break
-        log("side idx",side_idx_map)
+        log("side idx",side_idx_map,1)
+        scards[i][s_idx]["idx_map"] = side_idx_map
 
-        # create a side instance for every permutation
-        for p_idx, perm in enumerate(perms):
-            frags = side.split("[")
-            log("frags", frags)
-            outstring = frags[0]
+        # create a side instance in sorder for every permutation
+        for perm in perms:
+            order_unit = {}
+            order_unit["front_side"] = s_idx
+            order_unit["perm"] = perm
+            # convert Perms to actual indexes
+            sorder.append({"card":i,"front_side":s_idx, "perm":perm})
 
-            for f_idx, frag in enumerate(frags[1:]):
-                log("frag",frag)
-                # every frag but the first should start with a keystring
-                frag = frag[frag.find("]")+1:]
-                log("frag cut:", frag)
-
-                key = keylist[side_idx_map[f_idx]]
-                log("key", key)
-
-                group = d_data["Groups"][key]
-                key_sel = d_data["Groups"][key]["key-list"][perm[f_idx]]
-                log("key_sel", key_sel)
-                log("group_sel", group)
-                sel = ""
-                log("variant", variations[f_idx])
-
-                log("selectables", d_data["Selectables"][group["word-type"]])
-
-                for selectable in d_data["Selectables"][group["word-type"]]:
-                    if (selectable[group["key-type"]] == key_sel):
-                        sel = selectable[variations[f_idx]]
-                log("sel", sel)
-                outstring = outstring + sel + frag
-                log("outstring", outstring)
-
-            print(outstring)
-            print(p_idx)
-            #sorder_batch[p_idx] = {}
-            sorder_batch[p_idx][side_name] = outstring
-            #sorder_batch[p_idx].update({side_name:outstring})
-            print(json.dumps(sorder_batch,indent=4,ensure_ascii=False))
-            # End perm loop
         #end side loop
-    sorder.extend(sorder_batch)
     #end card loop
 
-print(sorder)
-shuffle(sorder)
-print(json.dumps(sorder,indent=4,ensure_ascii=False))
+def render_card_side(keylist, side, perm):
+    log("SIDE", side, 0)
+    frags = side["text"].split("[")
+    outstring = frags[0]
+    for f_idx, frag in enumerate(frags[1:]):
+        # every frag but the first should start with a keystring
+        frag = frag[frag.find("]")+1:]
+        key = keylist[side["idx_map"][f_idx]]
+        log("key", key, 0)
+        group = d_data["Groups"][key]
+        key_sel = group["key-list"][perm[side["idx_map"][f_idx]]]
+        log("key-sel", key_sel, 0)
+        sel = ""
+        for selectable in d_data["Selectables"][group["word-type"]]:
+            if (selectable[group["key-type"]] == key_sel):
+                sel = selectable[side["variations"][f_idx]]
+        outstring = outstring + sel + frag
+    return outstring
+
+log("scards", json.dumps(scards,indent=4,ensure_ascii=False),1)
+#random.shuffle(sorder)
+log("sorder", json.dumps(sorder,indent=4,ensure_ascii=False),1)
+
+for study in sorder:
+    keylist = re.findall(r"\[(.*?)\]", scards[study["card"]][0]["text"])
+    for k in range(len(keylist)):
+        keylist[k] = keylist[k].split(":")[0]
+
+    print(bcolors.OKCYAN + "\n\nFront Side:" + bcolors.ENDC)
+
+    log("study", study, 0)
+    log("keylist", keylist, 0)
+    log_json("current card",scards[study["card"]],0)
+
+    print(render_card_side(keylist, scards[study["card"]][study["front_side"]], study["perm"]))
+    #input()
+    print(bcolors.OKGREEN + "Back Side:" + bcolors.ENDC)
+    for side in scards[study["card"]]:
+        print(render_card_side(keylist, side, study["perm"]))
+
+
 
 

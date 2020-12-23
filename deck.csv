@@ -1,10 +1,10 @@
 # Selectables
 
 ## pronoun
-kanji;english
-これ;this
-それ;that
-あれ;that one there
+kanji;hira;english
+これ;これ;this
+それ;これ;that
+あれ;これ;that one there
 
 ## na-adj
 kanji;hira;english
@@ -20,13 +20,13 @@ kanji;hira;english
 高い;たかい;tall
 
 ## noun
-kanji;english
-問題;problem
-試験;exam
-日本食;japanese food
-バーガー;burger
-今日;today
-昨日;yesterday
+kanji;hira;english
+問題;もんだい;problem
+試験;しけん;exam
+日本食;にほんしょく;japanese food
+バーガー;バーガー;burger
+今日;きょう;today
+昨日;きのう;yesterday
 
 
 ## verb
@@ -42,7 +42,7 @@ kanji-affirmative;kanji-negative;kanji-affirmative-past;kanji-negative-past;engl
 this-that;pronoun;kanji;{これ,それ,あれ}
 level-of-difficulty;na-adj;kanji;{簡単,複雑}
 topic-of-study;noun;kanji;{問題,試験}
-food-todo;verb;kanji;{食べる,作る,捨てる}
+food-todo;verb;kanji-affirmative;{食べる,作る,捨てる}
 food;noun;kanji;{日本食,バーガー}
 past-day;noun;kanji;{昨日,今日}
 
@@ -59,17 +59,17 @@ past-day;noun;kanji;{昨日,今日}
 
 # Cards
 ## lingodeer-J2.1-plain-form-1
-english;kanji
-[this-that] is a [level-of-difficulty] [topic-of-study];[this-that]は[level-of-difficulty]な[topic-of-study]だ
-//Filler1 [this-that] filler2 [level-of-difficulty] filler3 [topic-of-study];フィラー1[this-that]フィラー2[topic-of-study]フィラー3[level-of-difficulty]
-[this-that] is not a [level-of-difficulty] [topic-of-study];[this-that]は[level-of-difficulty]な[topic-of-study]ではない
+english;kanji;hira
+[this-that] is a [level-of-difficulty] [topic-of-study];[this-that]は[level-of-difficulty]な[topic-of-study]だ;[this-that]は[level-of-difficulty]な[topic-of-study]だ
+Filler1 [this-that] filler2 [level-of-difficulty] filler3 [topic-of-study];フィラー1[this-that]フィラー2[topic-of-study]フィラー3[level-of-difficulty];フィラー1[this-that]フィラー2[topic-of-study]フィラー3[level-of-difficulty]
+[this-that] is not a [level-of-difficulty] [topic-of-study];[this-that]は[level-of-difficulty]な[topic-of-study]ではない;[this-that]は[level-of-difficulty]な[topic-of-study]ではない
 
 ## lingodeer-J2.2-plain-form-2
 english;kanji
 Futons are soft;布団は柔らかい
 Diamonds are very hard;ダイヤモンドはとても硬い
 
-//## lingodeer-J2.4-daily-life
-//english;kanji
+## lingodeer-J2.4-daily-life
+english;kanji
 //I ate the japanese food yesterday; kinou, nihonryouri wo tabeta
-//I [food-todo:english-preterite] the [food] [past-day];[past-day]、[food]を[food-todo:kanji-affirmative-past]
+I [food-todo:english-preterite] the [food] [past-day];[past-day]、[food]を[food-todo:kanji-affirmative-past]
