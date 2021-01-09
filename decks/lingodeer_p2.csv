@@ -1,0 +1,169 @@
+# Selectables
+
+## pronoun
+kanji;hira;english
+これ;これ;this
+それ;これ;that
+あれ;これ;that one there
+//my
+//their
+
+## na-adj
+kanji;hira;english
+簡単;かんたん;simple
+複雑;ふくざつ;complicated
+静か;しずか;quiet
+きれい;きれい;pretty
+親切;しんせつ;kind
+
+## i-adj
+kanji;hira;english
+おいしい;おいしい;tasty
+高い;たかい;tall
+
+## noun
+kanji;hira;english
+問題;もんだい;problem
+試験;しけん;exam
+日本食;にほんしょく;japanese food
+バーガー;バーガー;burger
+今日;きょう;today
+昨日;きのう;yesterday
+一昨日;おととい;the day before yesterday
+
+父;ちち;father
+母;はは;mother
+兄;あに;older brother
+姉;あね;older sister
+妹;いもうと;younger sister
+弟;おとうと;younger brother
+
+朝食;ちょうしょく;breakfast
+朝ご飯;あさごはん;breakfast
+昼食;ちゅうしょく;lunch
+昼ご飯;ひるごはん;lunch
+晩御飯;ばんごはん;dinner
+
+## verb
+kanji-affirmative;kanji-negative;kanji-affirmative-past;kanji-negative-past;english-simple;english-preterite;english-past-participle
+歌う;歌わない;歌った;歌わなかった;sing;sang;sung
+食べる;食べない;食べた;食べなかった;eat;ate;eaten
+作る;作らない;作った;作らなかった;make;made;made
+捨てる;捨てない;捨てた;捨てなかった;throw out;threw out;thrown out
+
+
+# Groups
+// name, word-type, key-type, key-list
+this-that;pronoun;kanji;{これ,それ,あれ}
+obj-specifier;
+level-of-difficulty;na-adj;kanji;{簡単,複雑}
+topic-of-study;noun;kanji;{問題,試験}
+past-day;noun;kanji;{一昨日,昨日,今日}
+casual-older-family-member;noun;kanji;{父,母,兄,姉}
+meal;noun;kanji;{朝食,朝ご飯,昼食,昼ご飯,晩御飯}
+
+# Pair Groups:
+
+## verb-able
+歌う;{song,tune}
+
+## objective-hardness
+柔らかい;{布団,ソファ}
+硬い;{ダイヤモンド,石}
+
+
+# Cards
+## lingodeer-J2.1-plain-form-1
+english;kanji;hira
+[this-that] is a [level-of-difficulty] [topic-of-study];[this-that]は[level-of-difficulty]な[topic-of-study]だ;[this-that]は[level-of-difficulty]な[topic-of-study]だ
+[this-that] is not a [level-of-difficulty] [topic-of-study];[this-that]は[level-of-difficulty]な[topic-of-study]ではない;[this-that]は[level-of-difficulty]な[topic-of-study]ではない
+// In the past, this place was dangerous
+// In the past this place wasn't dangerous
+// This place is a school
+// This place is not a school
+// Long ago this place was a school
+// Long ago this place was not a school
+// This place is safe
+// This place isn't safe
+// This place is a safe place
+// This place isn't a safe place
+// Yesterday's exam was easy
+// Yesterday's exam wasn't easy
+
+## lingodeer-J2.2-plain-form-2
+english;kanji
+Futons are soft;布団は柔らかい
+Diamonds are very hard;ダイヤモンドはとても硬い
+
+// Futons are soft
+// Diamonds are very hard
+// Long ago that river was very shallow
+// This river is very shallow
+// Last year's summer was hot
+// Last year's summer wasn't hot
+// This bed is soft
+// This bed isn't soft
+
+## lingodeer-J2.3-my-home
+english;kanji
+
+// My home's living room is small
+// My house has two bedrooms
+// when my older sister was in college, she didn't like yoga
+// the bedroom wasn't large but had a balcony
+// the bedroom isn't large but has a balcony
+// one year ago I had a boyfriend
+// my former living room was large but not well lit
+// my mother liked makeup before getting married
+// long ago my father was an athlete
+// my former home had a large entryway
+// my home has a large entryway
+// my former home was close to the school but far from the supermarket
+// my home is close to the school but far from the supermarket
+// my mother is beside me
+// my mother is to my left/right
+// this is a photo of my family/family member
+// I'm on the right of my sister
+// my father hates swimming but he's good at it
+// my father loves swimming but he's bad at it
+// this bedroom doesn't have a balcony
+// this house doesn't have a large kitchen
+// their hosue doesn't have a large kitchen
+// last year my boyfriend/parents/girlfriend/brother/ were living in an [adj] apartment
+
+## lingodeer-J2.4-daily-life
+english;kanji;hira
+//I ate the japanese food yesterday; kinou, nihonryouri wo tabeta
+I [food-todo:english-preterite] the [food] [past-day];[past-day]、[food]を[food-todo:kanji-affirmative-past]
+
+My [casual-older-family-member] makes [meal] basically every day;[casual-older-family-member]はほぼ毎日[meal]を作る;[casual-older-family-member]はほぼまいにち[meal]をつくる
+
+
+I [morning-todo] at [morning-time] every day
+I used to [morning-todo] at [morning-time] every day
+[prior-day] I [morning-todo] at [morning-time]
+I'm [morning-todo:continuous] at [morning-time] every day
+
+// my father basically makes breakfast every day
+// I get up/eat breakfast at 7 every day
+// I used to get up/eat breakfast at 7 every day
+// yesterday I got up at 7
+// I'm getting up at seven every day, 私は毎日7時に起きています
+// mom does't drink coffee
+// now, I'm walking the dog every day
+// I didn't go to work yesterday
+// I didn't come to school yesterday
+// I won't go to school today
+// there are times I don't eat [meal]
+// there are times I don't make [meal]
+// there are days when I don't read the [newspaper/novels/magazines]
+// there are times I take the bus to work
+// there are times when father takes the bus to work
+// I have taken planes before
+// I have been to japan before
+// I have not been to japan before
+// mom is cooking dinner
+// I don't have a car
+// I was watching tv last night
+// I hadn't had dinner yet at that time
+// I'm busy but I

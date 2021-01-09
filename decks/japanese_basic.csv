@@ -28,7 +28,6 @@ kanji;hira;english
 今日;きょう;today
 昨日;きのう;yesterday
 
-
 ## verb
 kanji-affirmative;kanji-negative;kanji-affirmative-past;kanji-negative-past;english-simple;english-preterite;english-past-participle
 歌う;歌わない;歌った;歌わなかった;sing;sang;sung
@@ -47,29 +46,19 @@ food;noun;kanji;{日本食,バーガー}
 past-day;noun;kanji;{昨日,今日}
 
 
-# Pair Groups:
-
-## verb-able
-歌う;{song,tune}
-
-## objective-hardness
-柔らかい;{布団,ソファ}
-硬い;{ダイヤモンド,石}
-
-
 # Cards
-## lingodeer-J2.1-plain-form-1
+## default-variant-examples
 english;kanji;hira
 [this-that] is a [level-of-difficulty] [topic-of-study];[this-that]は[level-of-difficulty]な[topic-of-study]だ;[this-that]は[level-of-difficulty]な[topic-of-study]だ
 Filler1 [this-that] filler2 [level-of-difficulty] filler3 [topic-of-study];フィラー1[this-that]フィラー2[topic-of-study]フィラー3[level-of-difficulty];フィラー1[this-that]フィラー2[topic-of-study]フィラー3[level-of-difficulty]
 [this-that] is not a [level-of-difficulty] [topic-of-study];[this-that]は[level-of-difficulty]な[topic-of-study]ではない;[this-that]は[level-of-difficulty]な[topic-of-study]ではない
 
-## lingodeer-J2.2-plain-form-2
+## no-replaceable-examples
 english;kanji
 Futons are soft;布団は柔らかい
 Diamonds are very hard;ダイヤモンドはとても硬い
 
-## lingodeer-J2.4-daily-life
+## specified-variant-examples
 english;kanji
 //I ate the japanese food yesterday; kinou, nihonryouri wo tabeta
 I [food-todo:english-preterite] the [food] [past-day];[past-day]、[food]を[food-todo:kanji-affirmative-past]
