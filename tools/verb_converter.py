@@ -54,7 +54,6 @@ with open(sys.argv[1]) as csv_file:
             text += jvfg.generate_potential_form(row[0], VERB_CLASS, Formality.POLITE, Polarity.NEGATIVE) + ","
             # potential
 
-
         # english
         text += row[1]
         print(text)

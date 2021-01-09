@@ -2,9 +2,9 @@ import random
 import csv
 import json
 import re
-import inquirer
 import sys
 import itertools
+import inquirer
 
 DEBUG = False
 DEBUG_LEVEL = 0 # 0 is only the basics, higher numbers = more messages

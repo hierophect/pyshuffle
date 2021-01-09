@@ -1,71 +1,56 @@
 # PyShuffle
 
-PyShuffle is a basic script for creating and studying semi-randomly assembled sentences in Japanese. Using a JSON collection of "cards" and "word-lists", the program autofills categories for nouns, verbs and particles to create many variations of a single sentence for study. Many different kinds of sentences can be combined in a single deck for broad study sessions.
+PyShuffle is an application for creating and studying semi-randomly assembled sentences in other languages. Drawing from a user created deck using markdown-like syntax, the program creates a deck of unique flashcards by replacing sections of "card templates" with semi-random verbs, nouns, and other grammar atomics. The goal is to allow language learners to use a fairly short deck of templates to study large numbers of different vocabulary items, without overstudying any single "version" of a sentence.
 
-PyShuffle is capable of running on embedded devices such as the [OpenBook](https://github.com/joeycastillo/The-Open-Book) by using [Circuitpython](https://github.com/adafruit/circuitpython).
+## Requirements
 
+This program requires [inquirer](https://pypi.org/project/inquirer/). It can be installed with `pip install inquirer`. Windows is not supported.
 
-
-## 
-
-## Getting started:
-
-[JapaneseVerbConjugator](https://pypi.org/project/JapaneseVerbConjugator/) and [pykakasi](https://pypi.org/project/pykakasi/) are required to generate your own properly formatted word and card lists from .csv files. It is recommended to install these on a python virtual environment with tools like  [virtualenv](https://pypi.org/project/virtualenv/)/[virtualenvwrapper](https://pypi.org/project/virtualenvwrapper/).
+The Japanese verb conjugation tool in `tools/` also requires the [JapaneseVerbConjugator](https://pypi.org/project/JapaneseVerbConjugator/) and [pykakasi](https://pypi.org/project/pykakasi/).
 
 ```
-workon shuffle_env
 pip install romkan japaneseverbconjugator pykakasi
 ```
 
-You can view example files of the correct CSV format in the `tablegen/example_files` directory. CSV files can be created by hand or found online and reformatted. Run each script by passing the target csv file:
+## Getting Started
+
+Run pyshuffle by passing the location of the deck as an argument:
 
 ```
-python csv_to_table.py example_files/day_counters.csv
+python3 pyshuffle decks/japanese_basic.csv
 ```
 
-This will generate correctly formatted text that you can past into an appropriate "word lists" category. 
+The program will show a list of chapters. Select the desired chapters with the spacebar, and hit enter to begin a flashcard studying session.
 
 ## Creating Cards and Word-Lists
 
-The syntax of the decks.json file is very simple, containing two main groups, `word-lists` and `cards`. `word-lists` are categories of single words that are intended to replace a "token" inside a sentence - for instance, a token representing a "person" could select from words for "my father", "my friend", "Mr John Doe" or other titles. Similarly, a token for conjugated past-tense verbs could pick from "ran", "swam", "ate" etc. 
+The deck file uses a syntax inspired by Markdown, to make it easier to focus on writing cards without dealing with the syntax of formats like JSON or XML. It contains card templates, vocabulary, and rules for how **Replacables** (tokens within a card template) are replaced with **Selectables** (words associated with those tokens). For instance, a token representing a "person" could select from words for "my father", "my friend", "Mr John Doe" or other titles. Similarly, a token for "conjugated past-tense verb" could pick from "ran", "swam", "ate" etc. This allows many card variations to be represented by comparatively short lists of templates and vocabulary.
 
-`cards` represent sentences with exchangeable tokens for words. Each token is marked with an index number to link it to the translated versions, in case tokens undergo a change in order based on language-specific grammar conventions. Each token appears in the syntax`<<#::my_wordlist>>` where the `#` indicates the linking number. For Japanese, cards consist of three separate variations of the sentence - one in English, one in kanji form, and one in hiragana form for reading practice. Each sentence must contain all tokens  included in the first. 
+Decks are split into several sections:
 
-## Running the program
+ - **Selectables**: tables of vocabulary that include both translations and conjugation. Selectables can be broken into different subcategories, like Nouns, Verbs and Adjectives. Each subcategory may have different lists of **Variants**, the different version of a word - for instance, a verb may have various different kinds of conjugations that require a long list of variants, whereas a noun may only have two variants, "english" and "translated".
+ - **Groups**: tables that associate a list of Selectables with a name, so they can be used within a Replacable token. This is used to narrow down the list of vocabulary that can be accessed by a card - there are very few sentence templates that make sense with *every* verb in a language. Examples might include "things to do in a park" or "types of animals". Groups also include the information needed to search for and select the Selectables they contain, to reduce the amount of information needed in each card token.
+ - **Cards**: these are the actual card templates used to create the "deck" studied in the app. The text of the cards contains tokens that specify a Group from which to draw random vocabulary (Replacables). The "sides" of a card typically correspond to the different translations of a sentence, and adjust the content and order of the Replacables automatically.
 
-Shuffle assumes that a deck.json file exists in the same directory. Call it from a terminal with:
+A simple example of these sections in action:
+ - A card contains a simple sentence, "I saw an [animal] at the [location]", with both english and japanese sides.
+ - There are two replacables in this sentence, [animal] and [location]. Each of these corresponds to a group in the Group section. The "animal" group contains the words "dog", "cat" and "snake", and the "location" group contains "park" and "zoo".
+ - In the Selectables section, "dog", "cat", "snake", "park" and "zoo" are all listed as nouns. Each of them has an english and japanese translation.
+ - When the card is presented to the user, random entries for each replacable are selected from the appropriate groups. The final translation is "I saw a dog a the park", which when "turned over" shows "公園で犬を見た", the corresponding Japanese translation using the same words.
 
-```
-python shuffle.py
-```
-
-This will open an interactive study session. You can then select a single card from your collection to work on, or simply hit enter to have a rotating selection of all cards.
-
-## Using Circuitpython
-
-If you have an Open Book or similar embedded device and would like to create your own study tool, simply upload your JSON deck and the `code.py` file in the `circuitpy/` directory to your CIRCUITPY drive. The Open Book will also require the following circuitpython libraries:
-
-- `adafruit_bitmap_font`
-- `adafruit_bus_device`
-- `adafruit_display_text`
-- `adafruit_mcp230xx`
-- `babel`
-- `display_bidi_text`
-- `adafruit_debouncer.mpy`
-- `adafruit_il0398.py`
-
+ You can view a more comprehensive example in the `decks/japanese_basic.csv` deck. This includes more complex syntax like specifying the Variant of a word inside Replacable tokens, which is often required for verbs.
 
 
 ## Contributing
 
-I'm far from being a python pro so this sketch is so far pretty basic. Any ideas or issue reports would be greatly appreciated!
+Contributions of any kind are welcomed. If you have a question or comment about this project that is not appropriate for a Github issue, feel free to reach out to me directly at hierophect@gmail.com or on twitter at @Hierophect.
 
-Future goals for this project might include:
+**Upcoming features I would like to add:**
 
-- A "tag" system for words to include them in an exchange set, rather than using word-lists, so that words do not need to be included redundantly across multiple categories that contain them. 
-- More sophisticated management of tenses, such as storing verbs with all possible conjugations included. 
-- Better options for study sessions, such as selecting collections of cards or specifying a certain category of word to focus on. 
-- SRS features, such as storing familiarity numbers per card or per word, and storing them in a separate "metadata" file.
-- While in a study session, selecting specific words out of a card for a "sub-session" of focused practice. 
-- Knowledge cards for grammar linked to certain cards or categories. 
-- General improvement of code quality.
+ - [ ] A GUI option for less technical users, probably starting with [PySimpleGui](https://pypi.org/project/PySimpleGUI/)
+ - [ ] [Spaced Repetition](https://en.wikipedia.org/wiki/Spaced_repetition) features similar to Anki. This is complicated a bit by the fact that cards aren't unique, and thus would require extra features to help users pick distinguish what "part" of a card was forgotten.
+ - [ ] Additional syntax to separate vocabular into "chapters", making it easier to group vocab from language textbooks.
+ - [ ] New syntax options for things that will currently confuse the parser, such as including two groups of the same name in a card, or using words with multiple meanings/translations.
+ - [ ] Possibly some overarching special-case handler that can run regexes or user-defined functions after a card is generated, handling odds and ends like the english "a" vs "an" convention.
+ - [ ] A whole new "Pair Groups" section that allows certain words to always be paired with one another. Ex, "hard" and "soft" adjectives with associated lists of hard and soft nouns to describe, for use within the same "object is adj" template.
+
