@@ -3,10 +3,16 @@
 ## pronoun
 kanji;hira;english
 これ;これ;this
-それ;これ;that
-あれ;これ;that one there
+それ;それ;that
+あれ;あれ;that over there
 //my
 //their
+ここ;ここ;this place
+そこ;そこ;that place
+あそこ;あそこ;that place over there
+この;この;this
+その;この;that
+あの;この;that
 
 ## na-adj
 kanji;hira;english
@@ -15,14 +21,48 @@ kanji;hira;english
 静か;しずか;quiet
 きれい;きれい;pretty
 親切;しんせつ;kind
+安全;あんぜん;safe
+危険;きけん;dangerous
 
 ## i-adj
 kanji;hira;english
 おいしい;おいしい;tasty
 高い;たかい;tall
+硬い;かたい;hard
+柔らかい;やわらかい;soft
+浅い;あさい;shallow
+深い;ふかい;deep
+暖かい;あたたかい;warm
+暑い;あつい;hot
+寒い;さむい;cold
+涼しい;すずしい;cool
+
+## i-adj-stem
+kanji;hira;english
+おいし;おいし;tasty
+高;たか;tall
+硬;かた;hard
+柔らか;やわらか;soft
+浅;あさ;shallow
+深;ふか;deep
+暖か;あたたか;warm
+暑;あつ;hot
+寒;さむ;cold
+涼し;すずし;cool
+
+## adverb
+kanji;hira;english
+とても;とても;very
+少し;すこし;somewhat
+ちょっと;ちょっと;a little
+全然;ぜんぜん;not at all
+それ程;それほど;not very
+あまり;あまり;not very
 
 ## noun
 kanji;hira;english
+
+// Part 1
 問題;もんだい;problem
 試験;しけん;exam
 日本食;にほんしょく;japanese food
@@ -30,14 +70,33 @@ kanji;hira;english
 今日;きょう;today
 昨日;きのう;yesterday
 一昨日;おととい;the day before yesterday
+幼稚園;ようちえん;kindergarten
+レストラン;レストラン;restaurant
+食堂;しょくどう;cafeteria
+学校;がっこう;school
 
+// Part 2
+布団;ふとん;futon
+ソファー;ソファー;sofa
+ダイヤモンド;ダイヤモンド;diamond
+川;かわ;river
+ベット;ベット;bed
+池;いけ;pond
+去年;きょねん;last year
+今年;ことし;this year
+一昨年;おととし;the year before last
+秋;あき;autumn
+冬;ふゆ;winter
+春;はる;spring
+夏;なつ;summer
+
+// Part 4
 父;ちち;father
 母;はは;mother
 兄;あに;older brother
 姉;あね;older sister
 妹;いもうと;younger sister
 弟;おとうと;younger brother
-
 朝食;ちょうしょく;breakfast
 朝ご飯;あさごはん;breakfast
 昼食;ちゅうしょく;lunch
@@ -51,18 +110,47 @@ kanji-affirmative;kanji-negative;kanji-affirmative-past;kanji-negative-past;engl
 作る;作らない;作った;作らなかった;make;made;made
 捨てる;捨てない;捨てた;捨てなかった;throw out;threw out;thrown out
 
+## misc
+english;hira;kanji
+was;だった;だった
+wasn't;ではなかった;ではなかった
+is;だ;だ
+isn't;ではない;ではない
 
 # Groups
 // name, word-type, key-type, key-list
 this-that;pronoun;kanji;{これ,それ,あれ}
-obj-specifier;
 level-of-difficulty;na-adj;kanji;{簡単,複雑}
 topic-of-study;noun;kanji;{問題,試験}
 past-day;noun;kanji;{一昨日,昨日,今日}
+
+level-of-safety;na-adj;kanji;{安全,危険}
+this-that-place;pronoun;kanji;{ここ,そこ,あそこ}
+was-wasn't;misc;english;{was,wasn't}
+is-isn't;misc;english;{is,isn't}
+place-type;noun;english;{school,restaurant,kindergarten,cafeteria}
+
+level-of-depth;i-adj-stem;kanji;{浅,深}
+level-of-hardness;i-adj-stem;kanji;{硬,柔らか}
+body-of-water;noun;kanji;{川,池}
+subjective-hardness-thing;noun;kanji;{布団,ソファー,ベット}
+objectively-hard-thing;noun;kanji;{ダイヤモンド}
+objectively-soft-thing;noun;kanji;{布団,ソファー,ベット}
+this-that-adj;pronoun;kanji;{この,その,あの}
+level-affirmative;adverb;kanji;{とても,少し,ちょっと}
+prev-year;noun;kanji;{去年,今年,一昨年}
+season;noun;kanji;{秋,冬,春,夏}
+temperature;i-adj-stem;kanji;{暖か,暑,寒,涼し}
+furniture;noun;kanji;{布団,ソファー,ベット}
+
 casual-older-family-member;noun;kanji;{父,母,兄,姉}
 meal;noun;kanji;{朝食,朝ご飯,昼食,昼ご飯,晩御飯}
 
 # Pair Groups:
+##i-adj-link
+diamond;noun;english;{level:i-adj};{not at all:soft,not:cheap,very:hard,extremely:expensive}
+diamond;noun;english;{level:na-adj};{not at all:soft,not:cheap,very:hard,very:pretty,extremely:expensive}
+futon;noun;english;{:soft,}
 
 ## verb-able
 歌う;{song,tune}
@@ -75,34 +163,33 @@ meal;noun;kanji;{朝食,朝ご飯,昼食,昼ご飯,晩御飯}
 # Cards
 ## lingodeer-J2.1-plain-form-1
 english;kanji;hira
+
 [this-that] is a [level-of-difficulty] [topic-of-study];[this-that]は[level-of-difficulty]な[topic-of-study]だ;[this-that]は[level-of-difficulty]な[topic-of-study]だ
 [this-that] is not a [level-of-difficulty] [topic-of-study];[this-that]は[level-of-difficulty]な[topic-of-study]ではない;[this-that]は[level-of-difficulty]な[topic-of-study]ではない
-// In the past, this place was dangerous
-// In the past this place wasn't dangerous
-// This place is a school
-// This place is not a school
-// Long ago this place was a school
-// Long ago this place was not a school
-// This place is safe
-// This place isn't safe
-// This place is a safe place
-// This place isn't a safe place
-// Yesterday's exam was easy
-// Yesterday's exam wasn't easy
+
+In the past, [this-that-place] [was-wasn't] [level-of-safety];昔、[this-that-place]は[level-of-safety][was-wasn't];むかし、[this-that-place]は[level-of-safety][was-wasn't]
+[this-that-place] [is-isn't] [level-of-safety];[this-that-place]は[level-of-safety][is-isn't];[this-that-place]は[level-of-safety][is-isn't]
+
+In the past, [this-that-place] [was-wasn't] a [level-of-safety] place;昔、[this-that-place]は[level-of-safety]な場所[was-wasn't];むかし、[this-that-place]は[level-of-safety]なばしょ[was-wasn't]
+[this-that-place] [is-isn't] a [level-of-safety] place;[this-that-place]は[level-of-safety]な場所[is-isn't];[this-that-place]は[level-of-safety]なばしょ[is-isn't]
+
+In the past, [this-that-place] [was-wasn't] a [place-type];昔、[this-that-place]は[place-type][was-wasn't];むかし、[this-that-place]は[place-type][was-wasn't]
+[this-that-place] [is-isn't] a [place-type];[this-that-place]は[place-type][is-isn't];[this-that-place]は[place-type][is-isn't]
 
 ## lingodeer-J2.2-plain-form-2
-english;kanji
-Futons are soft;布団は柔らかい
-Diamonds are very hard;ダイヤモンドはとても硬い
+english;kanji;hira
 
-// Futons are soft
-// Diamonds are very hard
-// Long ago that river was very shallow
-// This river is very shallow
-// Last year's summer was hot
-// Last year's summer wasn't hot
-// This bed is soft
-// This bed isn't soft
+[objectively-hard-thing]s are hard;[objectively-hard-thing]は硬い;[objectively-hard-thing]はかた
+[objectively-soft-thing]s are soft;[objectively-soft-thing]は柔らかい;[objectively-soft-thing]はやわらかい
+Long ago, [this-that-adj] [body-of-water] was very [level-of-depth];昔、あの[body-of-water]はとても[level-of-depth]かった;むかし、あの[body-of-water]はとても[level-of-depth]かった
+Long ago, [this-that-adj] [body-of-water] wasn't [level-of-depth];昔、あの[body-of-water]は[level-of-depth]くなかった;むかし、あの[body-of-water]は[level-of-depth]くなかった
+[this-that-adj] [body-of-water] is [level-affirmative] [level-of-depth];[this-that-adj][body-of-water]は[level-affirmative][level-of-depth]い;[this-that-adj][body-of-water]は[level-affirmative][level-of-depth]い
+[this-that-adj] [body-of-water] isn't [level-of-depth];[this-that-adj][body-of-water]は[level-of-depth]くない;[this-that-adj][body-of-water]は[level-of-depth]くない
+
+[prev-year]'s [season] was [level-affirmative] [temperature];[prev-year]の[season]は[level-affirmative][temperature]かった;[prev-year]の[season]は[level-affirmative][temperature]かった
+[prev-year]'s [season] wasn't [temperature];[prev-year]の[season]は[temperature]くなかった;[prev-year]の[season]は[temperature]くなかった
+[this-that-adj] [furniture] is [level-affirmative] [level-of-hardness];[this-that-adj][furniture]は[level-affirmative][level-of-hardness]い;[this-that-adj][furniture]は[level-affirmative][level-of-hardness]い
+[this-that-adj] [furniture] isn't [level-of-hardness];[this-that-adj][furniture]は[level-of-hardness]くない;[this-that-adj][furniture]は[level-of-hardness]くない
 
 ## lingodeer-J2.3-my-home
 english;kanji
@@ -134,15 +221,15 @@ english;kanji
 ## lingodeer-J2.4-daily-life
 english;kanji;hira
 //I ate the japanese food yesterday; kinou, nihonryouri wo tabeta
-I [food-todo:english-preterite] the [food] [past-day];[past-day]、[food]を[food-todo:kanji-affirmative-past]
+I [food-todo:english-preterite] the [food] [past-day];[past-day]、[food]を[food-todo:kanji-affirmative-past];[past-day]、[food]を[food-todo:kanji-affirmative-past]
 
 My [casual-older-family-member] makes [meal] basically every day;[casual-older-family-member]はほぼ毎日[meal]を作る;[casual-older-family-member]はほぼまいにち[meal]をつくる
 
 
-I [morning-todo] at [morning-time] every day
-I used to [morning-todo] at [morning-time] every day
-[prior-day] I [morning-todo] at [morning-time]
-I'm [morning-todo:continuous] at [morning-time] every day
+// I [morning-todo] at [morning-time] every day
+// I used to [morning-todo] at [morning-time] every day
+// [prior-day] I [morning-todo] at [morning-time]
+// I'm [morning-todo:continuous] at [morning-time] every day
 
 // my father basically makes breakfast every day
 // I get up/eat breakfast at 7 every day

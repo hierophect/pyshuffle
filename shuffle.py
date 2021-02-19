@@ -7,7 +7,7 @@ import itertools
 import inquirer
 
 DEBUG = False
-DEBUG_LEVEL = 0 # 0 is only the basics, higher numbers = more messages
+DEBUG_LEVEL = 2 # 0 is only the basics, higher numbers = more messages
 
 class bcolors:
     HEADER = '\033[95m'
@@ -51,6 +51,7 @@ with open(sys.argv[1]) as csv_file:
     line_count = 0
     # Increment through the rows in the file, changing list levels as required
     for row in csv_reader:
+        print(row)
         if (not row) or (row[0][:2] == "//"):
             continue
         # Change section

@@ -1,0 +1,33 @@
+# Selectables
+
+## Noun
+
+アメリカ;アメリカ;America
+イギリス;イギリス;UK
+オーストラリア;オーストラリア;Australia
+日本;にほん;Japan
+中国;ちゅうごく;China
+
+
+# Groups
+country;noun;english;{America,UK,Australia,Japan,China}
+
+# Pair Groups
+
+# Cards
+
+I am a student
+What is your major?
+my major is english
+[person] is a [profession]
+[person] is [nationality]
+What time is it?
+It is x o clock
+How old are you?
+I'm x years old
+what year are you in college?
+I'm a sophomore
+what is your telepone number?
+it is x
+takeshi's mother is a high school teacher
+she is an english major
