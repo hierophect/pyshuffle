@@ -1,0 +1,218 @@
+{
+    "Selectables": {
+        "pronoun": [
+            {
+                "kanji": "これ",
+                "hira": "これ",
+                "english": "this"
+            },
+            {
+                "kanji": "それ",
+                "hira": "これ",
+                "english": "that"
+            },
+            {
+                "kanji": "あれ",
+                "hira": "これ",
+                "english": "that one there"
+            }
+        ],
+        "na-adj": [
+            {
+                "kanji": "簡単",
+                "hira": "かんたん",
+                "english": "simple"
+            },
+            {
+                "kanji": "複雑",
+                "hira": "ふくざつ",
+                "english": "complicated"
+            },
+            {
+                "kanji": "静か",
+                "hira": "しずか",
+                "english": "quiet"
+            },
+            {
+                "kanji": "きれい",
+                "hira": "きれい",
+                "english": "pretty"
+            },
+            {
+                "kanji": "親切",
+                "hira": "しんせつ",
+                "english": "kind"
+            }
+        ],
+        "i-adj": [
+            {
+                "kanji": "おいしい",
+                "hira": "おいしい",
+                "english": "tasty"
+            },
+            {
+                "kanji": "高い",
+                "hira": "たかい",
+                "english": "tall"
+            }
+        ],
+        "noun": [
+            {
+                "kanji": "問題",
+                "hira": "もんだい",
+                "english": "problem"
+            },
+            {
+                "kanji": "試験",
+                "hira": "しけん",
+                "english": "exam"
+            },
+            {
+                "kanji": "日本食",
+                "hira": "にほんしょく",
+                "english": "japanese food"
+            },
+            {
+                "kanji": "バーガー",
+                "hira": "バーガー",
+                "english": "burger"
+            },
+            {
+                "kanji": "今日",
+                "hira": "きょう",
+                "english": "today"
+            },
+            {
+                "kanji": "昨日",
+                "hira": "きのう",
+                "english": "yesterday"
+            }
+        ],
+        "verb": [
+            {
+                "kanji-affirmative": "歌う",
+                "kanji-negative": "歌わない",
+                "kanji-affirmative-past": "歌った",
+                "kanji-negative-past": "歌わなかった",
+                "english-simple": "sing",
+                "english-preterite": "sang",
+                "english-past-participle": "sung"
+            },
+            {
+                "kanji-affirmative": "食べる",
+                "kanji-negative": "食べない",
+                "kanji-affirmative-past": "食べた",
+                "kanji-negative-past": "食べなかった",
+                "english-simple": "eat",
+                "english-preterite": "ate",
+                "english-past-participle": "eaten"
+            },
+            {
+                "kanji-affirmative": "作る",
+                "kanji-negative": "作らない",
+                "kanji-affirmative-past": "作った",
+                "kanji-negative-past": "作らなかった",
+                "english-simple": "make",
+                "english-preterite": "made",
+                "english-past-participle": "made"
+            },
+            {
+                "kanji-affirmative": "捨てる",
+                "kanji-negative": "捨てない",
+                "kanji-affirmative-past": "捨てた",
+                "kanji-negative-past": "捨てなかった",
+                "english-simple": "throw out",
+                "english-preterite": "threw out",
+                "english-past-participle": "thrown out"
+            }
+        ]
+    },
+    "Groups": {
+        "this-that": {
+            "word-type": "pronoun",
+            "key-type": "kanji",
+            "key-list": [
+                "これ",
+                "それ",
+                "あれ"
+            ]
+        },
+        "level-of-difficulty": {
+            "word-type": "na-adj",
+            "key-type": "kanji",
+            "key-list": [
+                "簡単",
+                "複雑"
+            ]
+        },
+        "topic-of-study": {
+            "word-type": "noun",
+            "key-type": "kanji",
+            "key-list": [
+                "問題",
+                "試験"
+            ]
+        },
+        "food-todo": {
+            "word-type": "verb",
+            "key-type": "kanji-affirmative",
+            "key-list": [
+                "食べる",
+                "作る",
+                "捨てる"
+            ]
+        },
+        "food": {
+            "word-type": "noun",
+            "key-type": "kanji",
+            "key-list": [
+                "日本食",
+                "バーガー"
+            ]
+        },
+        "past-day": {
+            "word-type": "noun",
+            "key-type": "kanji",
+            "key-list": [
+                "昨日",
+                "今日"
+            ]
+        }
+    },
+    "Cards": {
+        "no-replaceable-examples": [
+            [
+                {
+                    "side_name": "english",
+                    "text": "Futons are soft"
+                },
+                {
+                    "side_name": "kanji",
+                    "text": "布団は柔らかい"
+                }
+            ],
+            [
+                {
+                    "side_name": "english",
+                    "text": "Diamonds are very hard"
+                },
+                {
+                    "side_name": "kanji",
+                    "text": "ダイヤモンドはとても硬い"
+                }
+            ]
+        ],
+        "specified-variant-examples": [
+            [
+                {
+                    "side_name": "english",
+                    "text": "I [food-todo:english-preterite] the [food] [past-day]"
+                },
+                {
+                    "side_name": "kanji",
+                    "text": "[past-day]、[food]を[food-todo:kanji-affirmative-past]"
+                }
+            ]
+        ]
+    }
+}

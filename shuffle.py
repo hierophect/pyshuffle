@@ -7,7 +7,7 @@ import itertools
 import inquirer
 
 DEBUG = False
-DEBUG_LEVEL = 2 # 0 is only the basics, higher numbers = more messages
+DEBUG_LEVEL = 0 # 0 is only the basics, higher numbers = more messages
 
 class bcolors:
     HEADER = '\033[95m'
@@ -38,9 +38,9 @@ if len(sys.argv) > 1:
 # groupings based on study topic (like lingodeer chapters).
 
 # Parse deck file into dictionary
-d_data = {}
-d_section = "invalid group"
-d_category = "invalid subgroup"
+d_data = {} # holds the json, a dict of sections
+d_section = "invalid section" # current section
+d_category = "invalid category" # current category/subsection
 d_catagory_readkeys = False
 selectable_keys = []
 
@@ -51,25 +51,29 @@ with open(sys.argv[1]) as csv_file:
     line_count = 0
     # Increment through the rows in the file, changing list levels as required
     for row in csv_reader:
-        print(row)
+        # Skip comments
         if (not row) or (row[0][:2] == "//"):
             continue
-        # Change section
+        # Change section (ie Selectables, Groups, Cards)
         if row[0][:2] == "# ":
             name = row[0][2:]
-            d_data[name] = dict()
+            d_data[name] = dict() # A dict of categories
             d_section = name
             continue
-        # Change category within a section, mark to read keys next row
+        # Change category (Nouns, chaper) within a section, mark to read keys next row
         if row[0][:3] == "## ":
             name = row[0][3:]
-            d_data[d_section][name] = list()
+            d_data[d_section][name] = list() # A list of entries
             d_category = name
             d_catagory_readkeys = True
             continue
         # Read category keys after a category header
         if d_catagory_readkeys:
             selectable_keys = row
+            # extract sideskip table
+            # if d_section == "Cards":
+            #     for key in selectable_keys:
+            #         if key[0] == '~':
             d_catagory_readkeys = False
             continue
         # Otherwise set items
@@ -88,7 +92,10 @@ with open(sys.argv[1]) as csv_file:
             # d_card["side_names"] = selectable_keys
             # d_card["sides"] = row[idx]
             d_data[d_section][d_category].append(d_card)
-            # keylist = re.findall(r"\[(.*?)\]", row[0])
+
+            # keylist = re.findall(r"\[(.*?)\]", scards[i][0]["text"])
+            # for k in range(len(keylist)):
+            #     keylist[k] = keylist[k].split(":")[0]
             # index = len(d_data[d_section][d_category])-1
             # d_data[d_section][d_category][index]["key-list"] = keylist
 

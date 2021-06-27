@@ -1,0 +1,210 @@
+diff --git a/.gitignore b/.gitignore
+index e10536a..7994154 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -2,3 +2,4 @@
+ # to make it easy to re-copy prerequisite libraries
+ lib/
+ ideas.md
++scratch/
+\ No newline at end of file
+diff --git a/decks/genki_1.csv b/decks/genki_1.csv
+index f85df3e..f30464c 100644
+--- a/decks/genki_1.csv
++++ b/decks/genki_1.csv
+@@ -1,33 +1,112 @@
+ # Selectables
+ 
+-## Noun
++## noun
++kanji;hira;english
+ 
++お母さん;おかあさん;mother
++お父さん;おとうさん;father
++お姉さん;おねえさん;older sister
++お兄さん;おにいさん;older brother
++妹;いもうと;younger sister
++弟;おとうと;younger brother
++
++医者;いしゃ;doctor
++会社員;かいしゃいん;office worker
++高校生;こうこうせい;high school student
++主婦;しゅふ;housewife
++大学院生;だいがくいんせい;graduate student
++大学生;だいがくせい;college student
++弁護士;べんごし;lawyer
++留学生;りゅうがくせい;international student
++先生;せんせい;teacher
++学生;がくせい;student
++
++科学;かがく;science
++アジア研究;アジアけんきゅう;Asian studies
++国際関係;こくさいかんけい;international relations
++コンピューター;コンピューター;computer
++人類学;じんるいがく;anthropology
++政治;せいじ;politics
++ビジネス;ビジネス;business
++文学;ぶんがく;literature
++歴史;れきし;history
++
++日本;にほん;Japan
+ アメリカ;アメリカ;America
+-イギリス;イギリス;UK
++イギリス;イギリス;Britain
+ オーストラリア;オーストラリア;Australia
+-日本;にほん;Japan
++韓国;かんこく;Korea
++スウェーデン;スウェーデン;Sweden
+ 中国;ちゅうごく;China
+ 
++日本人;にほんじん;Japanese
++アメリカ人;あめりかじん;American
++イギリス人;イギリスじん;British
++オーストラリア人;オーストラリアじん;Australian
++韓国人;かんこくじん;Korean
++中国人;ちゅうごくじん;Chinese
++
++英語;えいご;English (language)
++電話;でんわ;telephone
++友達;ともだち;friend
++名前;なまえ;name
++高校;こうこう;high school
++午後;ごご;P.M.
++午前;ごぜん;A.M.
++半;はん;half
++番号;ばんごう;number
++
++たけし;たけし;Takeshi
++メアリー;メアリー;Mary
++
++一;いち;one
++二;に;two
++三;さん;three
++四;し;four
++四;よ;four
++五;ご;five
++六;ろく;six
++七;しち;seven
++七;なな;seven
++八;はち;eight
++九;く;nine
++九;きゅう;nine
++十;じゅう;ten
++十一;じゅういち;eleven
++十二;じゅうに;twelve
+ 
+ # Groups
+-country;noun;english;{America,UK,Australia,Japan,China}
++country;noun;english;{Japan,America,Britain,Australia,Korea,Sweden,China}
++university-major;noun;kanji;{科学,アジア研究,国際関係,コンピューター,人類学,政治,ビジネス,文学,歴史,英語}
++occupation;noun;kanji;{医者,会社員,高校生,主婦,大学院生,大学生,弁護士,留学生,先生,学生}
++person;noun;english;{Takeshi,Mary}
++nationality;noun;english;{Japanese,American,British,Australian,Korean,Chinese}
++time;noun;hira;{いち,に,さん,よ,ご,ろく,しち,はち,く,じゅう,じゅういち,じゅうに}
++am-pm;noun;kanji;{午後,午前}
++//age
++//college-year
++family-member;noun;kanji;{お母さん,お父さん,お姉さん,お兄さん,妹,弟}
++
+ 
+ # Pair Groups
+ 
+ # Cards
++## ch1
++english;kanji;hira
++I am a [occupation];私は[occupation]です;わたしは[occupation]です
++What is your major?;専攻は何ですか?;せんこうはなんですか?
++my major is [university-major];専攻は[university-major]です;せんこうは[university-major]です
++[person] is a [occupation];[person]は[occupation]です;[person]は[occupation]です
++[person] is [nationality];[person]は[nationality]です;[person]は[nationality]です
++What time is it?;何時ですか。;なんじですか。
++It is [time] [am-pm] now;今は[am-pm][time]時です;いまは[am-pm][time]じです
++It is [time] o clock;[time]時です;[time]じです
++// How old are you?;何歳ですか。;なんさいですか。
++// I'm [age] years old;私は[age]歳です;わたしは[age]としです
++// what year are you in college?;あなたは大学の年ですか?;あなたはだいがくのねんですか?
++// I'm a sophomore;私は[college-year]です;わたしは[college-year]です
++// what is your telepone number?;あなたのテレポン番号は何ですか?;あなたのてれぽんばんごうはなんですか?
++// it is [telephone-number];それは[telephone-number]です;それは[telephone-number]です
++[person]'s [family-member] is a [occupation];[person]の[family-member]は[occupation]です;[person]の[family-member]は[occupation]です
++[person] is a [university-major] major;[person]は[university-major]専攻です;[person]は[university-major]せんこうです
+ 
+-I am a student
+-What is your major?
+-my major is english
+-[person] is a [profession]
+-[person] is [nationality]
+-What time is it?
+-It is x o clock
+-How old are you?
+-I'm x years old
+-what year are you in college?
+-I'm a sophomore
+-what is your telepone number?
+-it is x
+-takeshi's mother is a high school teacher
+-she is an english major
+diff --git a/shuffle.py b/shuffle.py
+index 611a22e..e46b8e6 100644
+--- a/shuffle.py
++++ b/shuffle.py
+@@ -7,7 +7,7 @@ import itertools
+ import inquirer
+ 
+ DEBUG = False
+-DEBUG_LEVEL = 2 # 0 is only the basics, higher numbers = more messages
++DEBUG_LEVEL = 0 # 0 is only the basics, higher numbers = more messages
+ 
+ class bcolors:
+     HEADER = '\033[95m'
+@@ -38,9 +38,9 @@ if len(sys.argv) > 1:
+ # groupings based on study topic (like lingodeer chapters).
+ 
+ # Parse deck file into dictionary
+-d_data = {}
+-d_section = "invalid group"
+-d_category = "invalid subgroup"
++d_data = {} # holds the json, a dict of sections
++d_section = "invalid section" # current section
++d_category = "invalid category" # current category/subsection
+ d_catagory_readkeys = False
+ selectable_keys = []
+ 
+@@ -51,19 +51,18 @@ with open(sys.argv[1]) as csv_file:
+     line_count = 0
+     # Increment through the rows in the file, changing list levels as required
+     for row in csv_reader:
+-        print(row)
+         if (not row) or (row[0][:2] == "//"):
+             continue
+         # Change section
+         if row[0][:2] == "# ":
+             name = row[0][2:]
+-            d_data[name] = dict()
++            d_data[name] = dict() # A dict of categories
+             d_section = name
+             continue
+         # Change category within a section, mark to read keys next row
+         if row[0][:3] == "## ":
+             name = row[0][3:]
+-            d_data[d_section][name] = list()
++            d_data[d_section][name] = list() # A list of entries
+             d_category = name
+             d_catagory_readkeys = True
+             continue
+@@ -88,9 +87,12 @@ with open(sys.argv[1]) as csv_file:
+             # d_card["side_names"] = selectable_keys
+             # d_card["sides"] = row[idx]
+             d_data[d_section][d_category].append(d_card)
+-            # keylist = re.findall(r"\[(.*?)\]", row[0])
+-            # index = len(d_data[d_section][d_category])-1
+-            # d_data[d_section][d_category][index]["key-list"] = keylist
++
++            keylist = re.findall(r"\[(.*?)\]", scards[i][0]["text"])
++            for k in range(len(keylist)):
++                keylist[k] = keylist[k].split(":")[0]
++            index = len(d_data[d_section][d_category])-1
++            d_data[d_section][d_category][index]["key-list"] = keylist
+ 
+ log("data", json.dumps(d_data,indent=4,ensure_ascii=False),1)
+ 
