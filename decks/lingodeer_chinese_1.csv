@@ -1,0 +1,82 @@
+# Selectables
+
+## compounds
+english;pinyin;chinese
+I am;Wǒ shì;我是
+You are;Nǐ shì;你是
+They are;Tāmen shì;他们是
+He is;Tā shì;他是
+She is;Tā shì;她是
+
+I am;Wǒ zài;我在
+You are;Nǐ zài;你在
+They are;Tāmen zài;他们在
+He is;Tā zài;他在
+She is;Tā zài;她在
+
+## pronouns
+english;pinyin;chinese
+they;Tāmen;他们
+they;Tāmen;她们
+you;Nǐ;你
+he;Tā;他
+she;Tā;她
+
+## nouns
+chinese;pinyin;english
+寒国人;Hán guórén;Korean
+法国人;Fàguó rén;French
+美国人;Měiguó rén;American
+中国人;Zhōngguó rén;Chinese
+
+苹果;Píngguǒ;apple
+梨;Lí;pear
+饺子;Jiǎozi;dumpling
+歌;gē;song
+收音机;shōuyīnjī;the radio
+
+## linking-verbs
+english;pinyin;chinese
+// note that in json, when these are used in a group, these must be searched by english!
+// In chinese, they're all the same word! But this problem goes away with SQL keys.
+am;shì;是
+are;shì;是
+is;shì;是
+
+# Groups
+// name, word-type, key-type, key-list
+person-assignment-being;compounds;chinese;{我是,你是,他们是,他是,她是}
+person-assignment-verbing;compounds;chinese;{我在,你在,他们在,他在,她在}
+// note that we can only include the female version by searching chinese!
+they-you;pronouns;chinese;{他们,她们,你}
+he-she;pronouns;english;{he,she}
+nationality;nouns;chinese;{寒国人,法国人,美国人,中国人}
+listenable-thing;nouns;english;{song,the radio}
+edible-thing;nouns;english;{apple,pear,dumpling}
+
+
+# Cards
+## ch-1
+english;chinese;~pinyin
+// example: I am Chinese
+// 我是中国人
+// Note that the exchanges immediately get tricky!
+// what do we put in for "shi"? is, am, and are can't be interchanged in english
+// two approaches:
+I am [nationality];我是[nationality];Wǒ shì [nationality]
+[they-you] are [nationality];[they-you]是[nationality];[they-you] shì [nationality]
+[he-she] is [nationality];[he-she]是[nationality];[he-she] shì [nationality]
+// or
+[person-assignment-being] [nationality];[person-assignment-being][nationality];[person-assignment-being] [nationality]
+// or maybe something like this? (not implemented, just brainstorming)
+//[person#link] [assignment-verb#link] [nationality]
+
+// example: I am listening to a song
+// 我在听歌
+// This is where we need something called a "pair group", something that links two words together
+// You can eat an apple, or listen to a song, but you can't eat a song.
+// I haven't implemented pair groups yet so we have to make a whole sentence per verb. Lame!
+I am listening to a [listenable-thing];我在听[listenable-thing];Wǒ zài tīng [listenable-thing]
+[person-assignment-verbing] listening to a [listenable-thing];[person-assignment-verbing]听[listenable-thing];[person-assignment-verbing] tīng [listenable-thing]
+[person-assignment-verbing] eating [edible-thing]s;[person-assignment-verbing]吃[edible-thing];[person-assignment-verbing] chī [edible-thing]
+

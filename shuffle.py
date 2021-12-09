@@ -51,6 +51,8 @@ with open(sys.argv[1]) as csv_file:
     line_count = 0
     # Increment through the rows in the file, changing list levels as required
     for row in csv_reader:
+        line_count += 1
+        print(str(line_count) + ", ", end='')
         # Skip comments
         if (not row) or (row[0][:2] == "//"):
             continue
@@ -58,23 +60,34 @@ with open(sys.argv[1]) as csv_file:
         if row[0][:2] == "# ":
             name = row[0][2:]
             d_data[name] = dict() # A dict of categories
+            # An ugly hack to get card meta working
+            if name == "Cards":
+                d_data["Card Meta"] = dict()
             d_section = name
             continue
         # Change category (Nouns, chaper) within a section, mark to read keys next row
         if row[0][:3] == "## ":
             name = row[0][3:]
             d_data[d_section][name] = list() # A list of entries
+            # Add special entry for card meta
+            if d_section == "Cards":
+                d_data["Card Meta"][name] = dict()
             d_category = name
             d_catagory_readkeys = True
             continue
         # Read category keys after a category header
         if d_catagory_readkeys:
             selectable_keys = row
-            # extract sideskip table
-            # if d_section == "Cards":
-            #     for key in selectable_keys:
-            #         if key[0] == '~':
             d_catagory_readkeys = False
+            # extract sideskip table
+            if d_section == "Cards":
+                display_side = [1] * len(selectable_keys)
+                for key_count, key in enumerate(selectable_keys):
+                    if key[0] == '~':
+                        selectable_keys[key_count] = key[1:]
+                        display_side[key_count] = 0
+                d_data["Card Meta"][d_category]["display_side"] = display_side
+                d_data["Card Meta"][d_category]["selectable_keys"] = selectable_keys
             continue
         # Otherwise set items
         if d_section == "Selectables":
@@ -88,7 +101,9 @@ with open(sys.argv[1]) as csv_file:
         elif d_section == "Cards":
             d_card = []
             for idx, side in enumerate(selectable_keys):
-                d_card.append({"side_name":side,"text":row[idx]})
+                side_idx = d_data["Card Meta"][d_category]["selectable_keys"].index(side)
+                displayable = d_data["Card Meta"][d_category]["display_side"][side_idx]
+                d_card.append({"side_name":side,"text":row[idx],"display":displayable})
             # d_card["side_names"] = selectable_keys
             # d_card["sides"] = row[idx]
             d_data[d_section][d_category].append(d_card)
@@ -199,11 +214,15 @@ for i in range(len(scards)):
         log("side idx",side_idx_map,1)
         scards[i][s_idx]["idx_map"] = side_idx_map
 
+        # don't make a side instance in sorder for skipped sides
+        if not side["display"]:
+            continue
+
         # create a side instance in sorder for every permutation
         for perm in perms:
-            order_unit = {}
-            order_unit["front_side"] = s_idx
-            order_unit["perm"] = perm
+            # order_unit = {}
+            # order_unit["front_side"] = s_idx
+            # order_unit["perm"] = perm
             # convert Perms to actual indexes
             sorder.append({"card":i,"front_side":s_idx, "perm":perm})
 

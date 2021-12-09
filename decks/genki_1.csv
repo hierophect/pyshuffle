@@ -92,7 +92,7 @@ family-member;noun;kanji;{お母さん,お父さん,お姉さん,お兄さん,�
 
 # Cards
 ## ch1
-english;kanji;hira
+english;kanji;~hira
 I am a [occupation];私は[occupation]です;わたしは[occupation]です
 What is your major?;専攻は何ですか?;せんこうはなんですか?
 my major is [university-major];専攻は[university-major]です;せんこうは[university-major]です
@@ -109,4 +109,3 @@ It is [time] o clock;[time]時です;[time]じです
 // it is [telephone-number];それは[telephone-number]です;それは[telephone-number]です
 [person]'s [family-member] is a [occupation];[person]の[family-member]は[occupation]です;[person]の[family-member]は[occupation]です
 [person] is a [university-major] major;[person]は[university-major]専攻です;[person]は[university-major]せんこうです
-
